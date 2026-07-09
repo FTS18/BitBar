@@ -12,14 +12,21 @@ A minimal, native network speed monitor that lives in your Windows 11 taskbar. N
 
 ## Installation
 
-Download Uplink.exe from [Releases](https://github.com/FTS18/Uplink/releases) and run install.ps1 (right-click, Run with PowerShell).
+Download `Uplink.exe` from [Releases](https://github.com/FTS18/Uplink/releases) and run `install.ps1` (right-click, Run with PowerShell).
 
 The installer will:
-- Build and copy the binary to C:\Program Files\Uplink
+- Build and copy the binary to `C:\Program Files\Uplink`
 - Create a Start Menu shortcut
 - Register it to auto-start on boot via the registry
 
-No admin rights are required after initial install.
+### Windows SmartScreen warning
+
+On first run, Windows will show a blue "Windows protected your PC" dialog. This happens to every new unsigned executable regardless of what it does.
+
+1. Click **More info**
+2. Click **Run anyway**
+
+That's it. The warning won't appear again.
 
 ## Settings
 
@@ -33,7 +40,7 @@ Settings are stored in HKCU\Software\Uplink.
 
 ## Building from source
 
-Requires [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0).
+Requires [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0).
 
 `
 cd windows
@@ -50,7 +57,7 @@ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true
 ## Requirements
 
 - Windows 10 22H2 or later (Windows 11 recommended)
-- .NET 8 Runtime (x64)
+- .NET 10 Runtime (x64) — [download](https://dotnet.microsoft.com/download/dotnet/10.0)
 - A taskbar
 
 ## License
