@@ -1,4 +1,4 @@
-﻿# Uplink
+# Uplink
 
 A minimal, native network speed monitor that lives in your Windows 11 taskbar. No bloat, no electron, no background services beyond itself.
 
@@ -33,7 +33,7 @@ Settings are stored in HKCU\Software\Uplink.
 
 ## Building from source
 
-Requires [.NET 10 SDK](https://dotnet.microsoft.com/download).
+Requires [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0).
 
 `
 cd windows
@@ -50,7 +50,7 @@ dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true
 ## Requirements
 
 - Windows 10 22H2 or later (Windows 11 recommended)
-- .NET 10 Runtime (x64)
+- .NET 8 Runtime (x64)
 - A taskbar
 
 ## License
