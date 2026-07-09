@@ -1,6 +1,8 @@
-# Uplink
+﻿![uplink](assets/logo.png)
 
 A minimal, native network speed monitor that lives in your Windows 11 taskbar. No bloat, no electron, no background services beyond itself.
+
+![screenshot](assets/screenshot.png)
 
 ## What it does
 
@@ -12,12 +14,9 @@ A minimal, native network speed monitor that lives in your Windows 11 taskbar. N
 
 ## Installation
 
-Download `Uplink.exe` from [Releases](https://github.com/FTS18/Uplink/releases) and run `install.ps1` (right-click, Run with PowerShell).
+Download `Uplink.exe` from [Releases](https://github.com/FTS18/Uplink/releases) and run it.
 
-The installer will:
-- Build and copy the binary to `C:\Program Files\Uplink`
-- Create a Start Menu shortcut
-- Register it to auto-start on boot via the registry
+Requires the [.NET 10 Desktop Runtime (x64)](https://dotnet.microsoft.com/download/dotnet/10.0/runtime) — 55 MB one-time install.
 
 ### Windows SmartScreen warning
 
@@ -28,6 +27,13 @@ On first run, Windows will show a blue "Windows protected your PC" dialog. This 
 
 That's it. The warning won't appear again.
 
+### Install to Program Files (optional)
+
+Right-click `install.ps1` and choose Run with PowerShell. It will:
+- Build and copy the binary to `C:\Program Files\Uplink`
+- Create a Start Menu shortcut
+- Register it to auto-start on boot via the registry
+
 ## Settings
 
 Right-click the taskbar widget and select **Settings** to configure:
@@ -36,28 +42,28 @@ Right-click the taskbar widget and select **Settings** to configure:
 - **Display Units** - MB/s (bytes) or Mbps (bits)
 - **Refresh Rate** - 100ms to 5000ms
 
-Settings are stored in HKCU\Software\Uplink.
+Settings are stored in `HKCU\Software\Uplink`.
 
 ## Building from source
 
 Requires [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0).
 
-`
+```
 cd windows
 dotnet build
 dotnet run
-`
+```
 
 To produce a single-file release binary:
 
-`
-dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true
-`
+```
+dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true --self-contained false
+```
 
 ## Requirements
 
 - Windows 10 22H2 or later (Windows 11 recommended)
-- .NET 10 Runtime (x64) — [download](https://dotnet.microsoft.com/download/dotnet/10.0)
+- [.NET 10 Desktop Runtime (x64)](https://dotnet.microsoft.com/download/dotnet/10.0/runtime)
 - A taskbar
 
 ## License
