@@ -12,7 +12,7 @@ $ExePath = "$InstallDir\$AppName.exe"
 
 Write-Host "Building and Publishing $AppName..." -ForegroundColor Cyan
 Set-Location "$PSScriptRoot\windows"
-dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true --self-contained true
+dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true --self-contained false
 
 if (-not (Test-Path "$PublishDir\$AppName.exe")) {
     Write-Host "Build failed. Could not find executable in $PublishDir." -ForegroundColor Red
