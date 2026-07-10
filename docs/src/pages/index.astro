@@ -301,18 +301,19 @@ import Layout from '../layouts/Layout.astro';
   @media (max-width: 800px) {
     .hero {
       grid-template-columns: 1fr;
-      gap: 2rem;
+      gap: 1.5rem;
       padding: 2rem 0;
     }
 
-    .hero-right { order: -1; }
+    /* Logo above text on mobile */
+    .hero-right { order: -1; justify-content: center; }
 
     .hero-logo {
-      width: 180px;
-      height: 180px;
+      max-width: 85vw;
+      width: 85vw;
     }
 
-    h1 { font-size: 2.5rem; }
+    h1 { font-size: 2.6rem; }
 
     .features { grid-template-columns: 1fr; }
   }

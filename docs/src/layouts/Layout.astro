@@ -83,6 +83,15 @@ const ogImageURL = "https://raw.githubusercontent.com/FTS18/BitBar/main/assets/l
       </main>
     </div>
 
+    <!-- Mobile bottom nav -->
+    <nav class="bottom-nav">
+      <a href="/docs/install" class="bnav-link">Docs</a>
+      <a href="https://github.com/FTS18/BitBar" target="_blank" rel="noopener noreferrer" class="bnav-link bnav-gh">
+        GitHub
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+    </nav>
+
     <footer class="footer">
       <div class="footer-inner">
         <svg width="14" height="14" viewBox="0 0 18 18" fill="none" style="opacity:0.3;flex-shrink:0">
@@ -406,10 +415,58 @@ const ogImageURL = "https://raw.githubusercontent.com/FTS18/BitBar/main/assets/l
   .btn-outline { background: transparent; color: var(--ink-900); border: 1.5px solid var(--ink-900); }
   .btn-outline:hover { background: var(--cream-200); }
 
-  /* ── Responsive ──────────────────────── */
+  /* ── Bottom nav (mobile only) ───────── */
+  .bottom-nav {
+    display: none;
+  }
+
   @media (max-width: 768px) {
+    /* Hide top header on mobile */
+    .header { display: none; }
+
+    /* Pad content above bottom bar */
+    body { padding-bottom: 68px; }
+
     .page-body { flex-direction: column; padding: 1.5rem 1.25rem; }
     .sidebar { width: 100%; border-bottom: 1.5px solid var(--border); padding-bottom: 1.5rem; }
-    .header-inner { padding: 0 1.25rem; }
+
+    /* Show bottom nav */
+    .bottom-nav {
+      display: flex;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-top: 1.5px solid var(--border);
+      height: 56px;
+      align-items: stretch;
+      padding: 0 1.25rem;
+      gap: 0.5rem;
+      padding-bottom: env(safe-area-inset-bottom, 0);
+    }
+
+    .bnav-link {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--ink-500);
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.12s, color 0.12s;
+    }
+    .bnav-link:hover,
+    .bnav-link:active { background: var(--cream-200); color: var(--ink-900); }
+
+    .bnav-gh {
+      background: var(--ink-900);
+      color: var(--cream-50) !important;
+      border-radius: 8px;
+    }
+    .bnav-gh:hover,
+    .bnav-gh:active { background: var(--ink-700) !important; }
   }
 </style>
