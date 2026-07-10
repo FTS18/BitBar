@@ -1,0 +1,326 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Home" showSidebar={false}>
+  <div class="landing-hero">
+    <div class="hero-left">
+      <div class="tagline">LIGHTWEIGHT • NATIVE • TELEMETRY</div>
+      <h1 class="hero-title">Your Network Speeds, Live on the Windows Taskbar</h1>
+      <p class="hero-desc">
+        BitBar is a minimal, open-source bandwidth monitor designed natively for Windows 11. Zero bloat, no background processes, and zero Electron overhead. Just clean, real-time speed.
+      </p>
+      
+      <div class="cta-group">
+        <a href="https://github.com/FTS18/BitBar/releases" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-hero">
+          Download BitBar.exe
+        </a>
+        <a href="/docs/install" class="btn btn-secondary btn-hero">
+          Read the Docs
+        </a>
+      </div>
+
+      <div class="badge-row">
+        <span class="badge">Windows 11 Native</span>
+        <span class="badge">No Background Service</span>
+        <span class="badge">~55 MB .NET 10</span>
+      </div>
+    </div>
+    
+    <div class="hero-right">
+      <!-- Interactive CSS Mockup of Flyout -->
+      <div class="flyout-mockup">
+        <div class="flyout-header">
+          <span class="flyout-label">Consumer</span>
+          <span class="flyout-value text-bold">chrome.exe</span>
+        </div>
+        <div class="divider"></div>
+        <div class="flyout-row">
+          <span class="flyout-label">Download</span>
+          <span class="flyout-value speed-down text-bold">142.8 KB/s</span>
+        </div>
+        <div class="divider"></div>
+        <div class="flyout-row">
+          <span class="flyout-label">Upload</span>
+          <span class="flyout-value speed-up text-bold">48.2 KB/s</span>
+        </div>
+        <div class="divider"></div>
+        
+        <!-- Graph Area -->
+        <div class="graph-area">
+          <svg viewBox="0 0 230 70" class="graph-svg">
+            <defs>
+              <linearGradient id="grad-down" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#000000" stop-opacity="0.15" />
+                <stop offset="100%" stop-color="#000000" stop-opacity="0.0" />
+              </linearGradient>
+            </defs>
+            <!-- Background Area -->
+            <path d="M 0 70 L 0 50 Q 30 20 60 55 T 120 15 T 180 40 T 230 10 L 230 70 Z" fill="url(#grad-down)"></path>
+            <!-- Down Path (Black line) -->
+            <path d="M 0 50 Q 30 20 60 55 T 120 15 T 180 40 T 230 10" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round"></path>
+          </svg>
+          <span class="graph-tooltip">60s Traffic History</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <h2>Core Features</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <h3>Integrated Widget</h3>
+        <p>Lives directly inside the Windows 11 taskbar without taking valuable desktop space. Hover to reveal more stats, click to customize.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Process Tracking</h3>
+        <p>Identifies which specific application is consuming the most bandwidth (e.g. Chrome, Steam, Zoom) so you can catch bandwidth hogs instantly.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Smart Auto-Fade</h3>
+        <p>The widget fades into the background when your network connection goes idle, reducing visual distractions on your taskbar.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Duochrome Theme Support</h3>
+        <p>Detects the operating system theme automatically and adapts, looking completely native on both light and dark modes.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>System Specifications</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Requirement</th>
+          <th>Specification</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Operating System</strong></td>
+          <td>Windows 10 22H2 or later (Windows 11 recommended)</td>
+        </tr>
+        <tr>
+          <td><strong>Framework</strong></td>
+          <td>.NET 10.0 Desktop Runtime (x64)</td>
+        </tr>
+        <tr>
+          <td><strong>Disk Footprint</strong></td>
+          <td>Under 5 MB (executable only)</td>
+        </tr>
+        <tr>
+          <td><strong>Memory Footprint</strong></td>
+          <td>~20 MB RAM during active telemetry monitoring</td>
+        </tr>
+        <tr>
+          <td><strong>CPU Overhead</strong></td>
+          <td>&lt; 0.1% CPU utilization on typical modern hardware</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</Layout>
+
+<style>
+  /* Landing Hero Styles */
+  .landing-hero {
+    display: flex;
+    align-items: center;
+    gap: 3.5rem;
+    padding: 3rem 0;
+  }
+
+  .hero-left {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .tagline {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    color: var(--text-secondary);
+  }
+
+  .hero-title {
+    font-size: 2.8rem;
+    font-weight: 850;
+    letter-spacing: -0.04em;
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-desc {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .cta-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .btn-hero {
+    padding: 0.8rem 1.6rem;
+    font-size: 1rem;
+  }
+
+  .badge-row {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+
+  .badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    color: var(--text-secondary);
+  }
+
+  .hero-right {
+    flex: 0.8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* CSS Mockup of the Win11 Flyout Widget */
+  .flyout-mockup {
+    width: 250px;
+    height: 160px;
+    background-color: var(--bg-surface);
+    border: 2px solid var(--accent-black);
+    border-radius: 6px;
+    box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.15);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  .flyout-header, .flyout-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+  }
+
+  .flyout-label {
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  .flyout-value {
+    color: var(--text-primary);
+  }
+
+  .text-bold {
+    font-weight: 700;
+  }
+
+  .speed-down, .speed-up {
+    color: var(--text-primary);
+  }
+
+  .divider {
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 2px 0;
+  }
+
+  .graph-area {
+    background-color: var(--bg-base);
+    border: 1px solid var(--border-color);
+    height: 70px;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .graph-svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .graph-tooltip {
+    position: absolute;
+    bottom: 4px;
+    left: 6px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Features Grid */
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .feature-card {
+    background-color: var(--bg-surface);
+    border: 2px solid var(--border-color);
+    padding: 1.25rem;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+  }
+
+  .feature-card:hover {
+    border-color: var(--accent-black);
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.1);
+  }
+
+  .feature-card h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+  }
+
+  .feature-card p {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  @media (max-width: 768px) {
+    .landing-hero {
+      flex-direction: column;
+      text-align: center;
+      gap: 2rem;
+      padding: 1.5rem 0;
+    }
+
+    .hero-title {
+      font-size: 2.2rem;
+    }
+
+    .cta-group {
+      justify-content: center;
+    }
+
+    .badge-row {
+      justify-content: center;
+    }
+
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

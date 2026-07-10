@@ -1,0 +1,66 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Configuration & Settings" showSidebar={true} activeSlug="settings">
+  <h1>Configuration & Settings</h1>
+  <p>BitBar allows you to configure your telemetry preferences through a graphical interface, which stores settings locally in the Windows registry.</p>
+
+  <h2>Accessing Settings</h2>
+  <p>To configure BitBar, simply <strong>right-click</strong> the network speed label on your Windows taskbar and choose <strong>"Settings"</strong>. This will open the settings dialog.</p>
+
+  <h2>Available Preferences</h2>
+  
+  <h3>1. Network Adapter Binding</h3>
+  <ul>
+    <li><strong>Auto-Detect (Default):</strong> Automatically binds to the active network adapter routing your internet traffic. If you connect to a VPN or switch from Wi-Fi to Ethernet, BitBar will re-bind on the fly.</li>
+    <li><strong>Manual Interface Pinning:</strong> Select a specific network card (e.g. <em>Intel(R) Wi-Fi 6E</em>, <em>Realtek Gaming Family Controller</em>, or your VPN tunnel adapter) to monitor only that interface.</li>
+  </ul>
+
+  <h3>2. Display Units</h3>
+  <p>Toggle between how the throughput speed is displayed on your taskbar and flyout:</p>
+  <ul>
+    <li><strong>MB/s (Megabytes per second):</strong> Preferred for file downloads, storage sizes, and standard browser usage.</li>
+    <li><strong>Mbps (Megabits per second):</strong> Preferred for network speedtests, ISP comparisons, and router bandwidth limits.</li>
+  </ul>
+
+  <h3>3. Refresh Rate</h3>
+  <p>Adjust the slider to control the polling frequency of the network interfaces (from <strong>100ms</strong> to <strong>5000ms</strong>).</p>
+  <ul>
+    <li><strong>Lower Interval (e.g. 250ms):</strong> Gives highly precise real-time speed bursts but increases CPU interrupts slightly.</li>
+    <li><strong>Higher Interval (e.g. 2000ms):</strong> Ideal for low-power laptops or maximum energy savings.</li>
+  </ul>
+
+  <h2>Registry Storage Details</h2>
+  <p>All configurations are saved immediately without a background daemon in the Windows Registry. You can manually inspect or modify these settings using the Registry Editor (<code>regedit</code>) at:</p>
+
+  <pre><code>Computer\HKEY_CURRENT_USER\Software\BitBar</code></pre>
+
+  <p>The registry key holds the following DWORD/String attributes:</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Value Name</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>AdapterName</code></td>
+        <td>String (REG_SZ)</td>
+        <td>The description name of the pinned adapter (or empty string for Auto-Detect).</td>
+      </tr>
+      <tr>
+        <td><code>DisplayUnits</code></td>
+        <td>String (REG_SZ)</td>
+        <td>Either <code>"MB/s"</code> or <code>"Mbps"</code>.</td>
+      </tr>
+      <tr>
+        <td><code>RefreshInterval</code></td>
+        <td>DWORD (REG_DWORD)</td>
+        <td>Interval in milliseconds (e.g. <code>1000</code>).</td>
+      </tr>
+    </tbody>
+  </table>
+</Layout>

@@ -1,0 +1,41 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Troubleshooting Guide" showSidebar={true} activeSlug="troubleshooting">
+  <h1>Troubleshooting Guide</h1>
+  <p>Find solutions for common installation, execution, or runtime issues with BitBar.</p>
+
+  <h2>1. Build Failure (Process File Lock)</h2>
+  <p>If you get a build warning or error during compilation or script installation similar to:</p>
+  
+  <pre><code>warning MSB3026: Could not copy "..." to "...BitBar.exe". 
+The process cannot access the file because it is being used by another process.</code></pre>
+
+  <p>This happens because an instance of BitBar is currently running in your taskbar, locking the executable file.</p>
+  
+  <h3>Solution:</h3>
+  <p>Open a PowerShell terminal and run the following command to terminate any active instances of BitBar before rebuilding:</p>
+  <pre><code>Stop-Process -Name BitBar -Force -ErrorAction SilentlyContinue</code></pre>
+
+  <h2>2. Resetting App Configuration</h2>
+  <p>If BitBar settings become corrupted or if you want to restore the application back to its default clean slate (Auto-detect adapter, MB/s units, 1000ms refresh rate):</p>
+
+  <h3>Solution:</h3>
+  <ol>
+    <li>Press <code>Win + R</code>, type <code>regedit</code>, and press Enter to open the Registry Editor.</li>
+    <li>Navigate to: <code>HKEY_CURRENT_USER\Software</code>.</li>
+    <li>Right-click the <code>BitBar</code> folder and select <strong>Delete</strong>.</li>
+    <li>Restart BitBar. It will automatically recreate the registry keys with defaults.</li>
+  </ol>
+  
+  <p>Alternatively, you can run this single command in PowerShell:</p>
+  <pre><code>Remove-Item -Path "HKCU:\Software\BitBar" -Recurse -Force -ErrorAction SilentlyContinue</code></pre>
+
+  <h2>3. Missing .NET Runtime Errors</h2>
+  <p>If the application immediately crashes upon launch or fails to open without warning, you may be missing the desktop runtime.</p>
+
+  <h3>Solution:</h3>
+  <p>BitBar requires the <strong>.NET 10.0 Desktop Runtime (x64)</strong>. Make sure you install the <em>"Desktop Runtime"</em> and NOT just the base runtime or SDK.</p>
+  <p>You can download the installer from <a href="https://dotnet.microsoft.com/download/dotnet/10.0/runtime" target="_blank" rel="noopener noreferrer">Microsoft's .NET Portal</a>.</p>
+</Layout>

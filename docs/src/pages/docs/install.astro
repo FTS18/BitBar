@@ -1,0 +1,59 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Installation Guide" showSidebar={true} activeSlug="install">
+  <h1>Installation Guide</h1>
+  <p>Learn how to download, compile, or install BitBar to your Windows machine.</p>
+
+  <h2>Quick Start (Precompiled Binary)</h2>
+  <ol>
+    <li>Go to the <a href="https://github.com/FTS18/BitBar/releases" target="_blank" rel="noopener noreferrer"><strong>Releases Page</strong></a> on GitHub.</li>
+    <li>Download the latest <code>BitBar.exe</code>.</li>
+    <li>Place it anywhere on your PC (e.g. <code>C:\Tools\BitBar.exe</code>) and run it.</li>
+  </ol>
+
+  <div class="alert">
+    <div class="alert-title">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+      Windows SmartScreen Warning
+    </div>
+    <p>Since BitBar is a new, unsigned executable, Windows might show a blue dialog saying <em>"Windows protected your PC"</em>. Click <strong>"More info"</strong> and then <strong>"Run anyway"</strong>. This warning only shows once.</p>
+  </div>
+
+  <h2>Full Installation (Recommended)</h2>
+  <p>To run BitBar automatically on startup and copy it to a secure location (<code>Program Files</code>), you can use the provided PowerShell install script:</p>
+  
+  <ol>
+    <li>Clone the repository or download the source folder.</li>
+    <li>Right-click <code>install.ps1</code> in the root directory and select <strong>Run with PowerShell</strong>.</li>
+    <li>The script will request Administrator privileges to:
+      <ul>
+        <li>Build the project.</li>
+        <li>Copy the binary to <code>C:\Program Files\BitBar\</code>.</li>
+        <li>Create a Start Menu shortcut.</li>
+        <li>Register BitBar to start automatically when Windows boots.</li>
+      </ul>
+    </li>
+  </ol>
+
+  <h2>Building from Source</h2>
+  <p>If you prefer to compile BitBar yourself, you can build it from source using the .NET 10 SDK:</p>
+
+  <h3>Prerequisites</h3>
+  <ul>
+    <li>Windows 10/11</li>
+    <li><a href="https://dotnet.microsoft.com/download/dotnet/10.0" target="_blank" rel="noopener noreferrer">.NET 10 SDK</a></li>
+  </ul>
+
+  <h3>Build Commands</h3>
+  <p>Open a terminal in the <code>windows/</code> folder and run the following commands:</p>
+
+  <pre><code># Run in debug mode
+dotnet run
+
+# Produce a self-contained, single-file release binary
+dotnet publish -c Release -r win-x64 -p:PublishSingleFile=true --self-contained false</code></pre>
+
+  <p>This will generate a single-file executable in <code>windows/bin/Release/net10.0-windows/win-x64/publish/BitBar.exe</code>.</p>
+</Layout>

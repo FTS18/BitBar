@@ -1,0 +1,458 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  showSidebar?: boolean;
+  activeSlug?: string;
+}
+
+const {
+  title,
+  description = "A minimal, native network speed monitor that lives in your Windows 11 taskbar. No bloat, no electron, no background services.",
+  showSidebar = false,
+  activeSlug = "",
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, "https://github.com/FTS18/BitBar");
+const ogImageURL = "https://github.com/FTS18/BitBar/raw/main/assets/logo.png";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary SEO Meta Tags -->
+    <title>{title} | BitBar</title>
+    <meta name="title" content={`${title} | BitBar`} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={`${title} | BitBar`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageURL} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={`${title} | BitBar`} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogImageURL} />
+
+    <!-- Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Top Navigation -->
+      <header class="header">
+        <div class="header-content">
+          <a href="/" class="brand">
+            <img src="/logo.png" alt="BitBar Logo" class="brand-logo" />
+            <span class="brand-name">BitBar</span>
+          </a>
+          <nav class="nav">
+            <a href="/docs/install" class={activeSlug.startsWith("docs/") ? "nav-link active" : "nav-link"}>Docs</a>
+            <a href="https://github.com/FTS18/BitBar" target="_blank" rel="noopener noreferrer" class="nav-link github-link">
+              GitHub 
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </a>
+          </nav>
+        </div>
+      </header>
+
+      <!-- Main Layout -->
+      <div class="layout-body">
+        {showSidebar && (
+          <aside class="sidebar">
+            <div class="sidebar-section">
+              <h3 class="sidebar-title">Getting Started</h3>
+              <ul class="sidebar-list">
+                <li>
+                  <a href="/docs/install" class={activeSlug === "install" ? "sidebar-link active" : "sidebar-link"}>Installation</a>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-section">
+              <h3 class="sidebar-title">Usage & Configuration</h3>
+              <ul class="sidebar-list">
+                <li>
+                  <a href="/docs/settings" class={activeSlug === "settings" ? "sidebar-link active" : "sidebar-link"}>Settings</a>
+                </li>
+                <li>
+                  <a href="/docs/troubleshooting" class={activeSlug === "troubleshooting" ? "sidebar-link active" : "sidebar-link"}>Troubleshooting</a>
+                </li>
+              </ul>
+            </div>
+          </aside>
+        )}
+        
+        <main class={showSidebar ? "main-content with-sidebar" : "main-content"}>
+          <slot />
+        </main>
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-content">
+          <p>© {new Date().getFullYear()} BitBar. Open-source under the MIT License.</p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  /* Flat Duotone Design System (Cream & Black) */
+  :root {
+    --bg-base: #FDFCF7;          /* Primary cream background */
+    --bg-surface: #F5F3E9;       /* Card/sidebar background */
+    --bg-surface-hover: #EDEAE0; /* Hover state for list items */
+    --border-color: #DCD7C5;     /* Flat solid border */
+    
+    --text-primary: #1A1813;     /* Main text */
+    --text-secondary: #5C584C;   /* Subtitles & metadata */
+    
+    --accent-black: #000000;     /* Strong accent */
+    --accent-hover: #26241F;     /* Hover state for buttons/links */
+
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    overflow-y: scroll;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* Header */
+  .header {
+    background-color: var(--bg-base);
+    border-bottom: 2px solid var(--accent-black);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .brand-logo {
+    height: 32px;
+    width: 32px;
+    object-fit: contain;
+  }
+
+  .brand-name {
+    font-weight: 800;
+    font-size: 1.3rem;
+    letter-spacing: -0.02em;
+  }
+
+  .nav {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .nav-link {
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: opacity 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .nav-link:hover {
+    color: var(--accent-black);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .nav-link.active {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    font-weight: 700;
+  }
+
+  /* Body Layout */
+  .layout-body {
+    flex: 1;
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    padding: 2rem 1.5rem;
+    gap: 2.5rem;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    width: 220px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .sidebar-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .sidebar-title {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+    font-weight: 700;
+  }
+
+  .sidebar-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .sidebar-link {
+    display: block;
+    padding: 0.4rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.15s ease;
+  }
+
+  .sidebar-link:hover {
+    background-color: var(--bg-surface);
+    color: var(--accent-black);
+  }
+
+  .sidebar-link.active {
+    background-color: var(--accent-black);
+    color: var(--bg-base);
+    font-weight: 600;
+  }
+
+  /* Main Content Area */
+  .main-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* Flat Typography Elements */
+  h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.3rem;
+  }
+
+  h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    margin-bottom: 1.2rem;
+    color: var(--text-primary);
+  }
+
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background-color: var(--bg-surface);
+    padding: 0.2rem 0.4rem;
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+  }
+
+  pre {
+    background-color: var(--bg-surface);
+    border: 2px solid var(--accent-black);
+    padding: 1rem;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+  }
+
+  pre code {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    font-size: 0.85rem;
+    color: inherit;
+  }
+
+  ul, ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Button UI styling */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background-color: var(--accent-black);
+    color: var(--bg-base);
+    border: 2px solid var(--accent-black);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--accent-hover);
+  }
+
+  .btn-secondary {
+    background-color: transparent;
+    color: var(--accent-black);
+    border: 2px solid var(--accent-black);
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--bg-surface);
+  }
+
+  /* Footer */
+  .footer {
+    border-top: 2px solid var(--border-color);
+    background-color: var(--bg-surface);
+    margin-top: auto;
+  }
+
+  .footer-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+
+  /* Table styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    border: 2px solid var(--accent-black);
+  }
+
+  th, td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border: 1px solid var(--border-color);
+  }
+
+  th {
+    background-color: var(--bg-surface);
+    font-weight: 700;
+    border-bottom: 2px solid var(--accent-black);
+  }
+
+  tr:nth-child(even) td {
+    background-color: var(--bg-surface);
+  }
+
+  /* Flat custom alert box */
+  .alert {
+    background-color: var(--bg-surface);
+    border-left: 6px solid var(--accent-black);
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .alert-title {
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .layout-body {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .sidebar {
+      width: 100%;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 1.5rem;
+    }
+  }
+</style>
