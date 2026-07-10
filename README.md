@@ -1,4 +1,4 @@
-﻿![uplink](assets/logo.png)
+![BitBar](assets/logo.png)
 
 A minimal, native network speed monitor that lives in your Windows 11 taskbar. No bloat, no electron, no background services beyond itself.
 
@@ -14,7 +14,7 @@ A minimal, native network speed monitor that lives in your Windows 11 taskbar. N
 
 ## Installation
 
-Download `Uplink.exe` from [Releases](https://github.com/FTS18/Uplink/releases) and run it.
+Download `BitBar.exe` from [Releases](https://github.com/FTS18/BitBar/releases) and run it.
 
 Requires the [.NET 10 Desktop Runtime (x64)](https://dotnet.microsoft.com/download/dotnet/10.0/runtime) — 55 MB one-time install.
 
@@ -30,7 +30,7 @@ That's it. The warning won't appear again.
 ### Install to Program Files (optional)
 
 Right-click `install.ps1` and choose Run with PowerShell. It will:
-- Build and copy the binary to `C:\Program Files\Uplink`
+- Build and copy the binary to `C:\Program Files\BitBar`
 - Create a Start Menu shortcut
 - Register it to auto-start on boot via the registry
 
@@ -42,7 +42,7 @@ Right-click the taskbar widget and select **Settings** to configure:
 - **Display Units** - MB/s (bytes) or Mbps (bits)
 - **Refresh Rate** - 100ms to 5000ms
 
-Settings are stored in `HKCU\Software\Uplink`.
+Settings are stored in `HKCU\Software\BitBar`.
 
 ## Building from source
 

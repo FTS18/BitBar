@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using System.Linq;
 using System.Runtime.InteropServices;
 
-namespace Uplink
+namespace BitBar
 {
     public class SettingsForm : Form
     {
@@ -28,7 +28,7 @@ namespace Uplink
 
         private void InitializeComponent()
         {
-            this.Text = "Uplink - Settings";
+            this.Text = "BitBar - Settings";
             this.Size = new Size(350, 350);
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.StartPosition = FormStartPosition.CenterScreen;

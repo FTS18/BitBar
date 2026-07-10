@@ -5,7 +5,7 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
     exit
 }
 
-$AppName = "Uplink"
+$AppName = "BitBar"
 $InstallDir = "C:\Program Files\$AppName"
 $PublishDir = "$PSScriptRoot\windows\bin\Release\net10.0-windows\win-x64\publish"
 $ExePath = "$InstallDir\$AppName.exe"
@@ -46,7 +46,7 @@ Write-Host "Starting $AppName..." -ForegroundColor Cyan
 Start-Process $ExePath
 
 Write-Host "=========================================" -ForegroundColor Green
-Write-Host "Installation Complete! Uplink is now running." -ForegroundColor Green
+Write-Host "Installation Complete! BitBar is now running." -ForegroundColor Green
 Write-Host "It will automatically start when Windows boots." -ForegroundColor Green
 Write-Host "=========================================" -ForegroundColor Green
 Pause

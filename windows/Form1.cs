@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Linq;
 
-namespace Uplink
+namespace BitBar
 {
     public partial class Form1 : Form
     {
@@ -80,7 +80,7 @@ namespace Uplink
         private const int MaxHistory = 60;
 
         private ulong prevIdleTime, prevKernelTime, prevUserTime;
-        private const string RegKey = @"Software\Uplink";
+        private const string RegKey = @"Software\BitBar";
         private bool isHovered = false;
         private System.Windows.Forms.Timer hoverTimer;
 
@@ -211,13 +211,13 @@ namespace Uplink
             contextMenu.Items.Add("Settings", null, (s, e) => {
                 new SettingsForm(this).ShowDialog();
             });
-            var exitItem = new ToolStripMenuItem("Exit Uplink", null, (s, e) => Application.Exit());
+            var exitItem = new ToolStripMenuItem("Exit BitBar", null, (s, e) => Application.Exit());
             contextMenu.Items.Add(exitItem);
 
             trayIcon = new NotifyIcon();
             trayIcon.Icon = SystemIcons.Information; // Or custom icon
             try { trayIcon.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath); } catch { }
-            trayIcon.Text = "Uplink";
+            trayIcon.Text = "BitBar";
             trayIcon.ContextMenuStrip = contextMenu;
             trayIcon.Visible = true;
 

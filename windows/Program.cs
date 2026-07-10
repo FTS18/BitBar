@@ -1,4 +1,4 @@
-namespace Uplink;
+namespace BitBar;
 
 static class Program
 {
