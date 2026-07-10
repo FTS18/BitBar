@@ -48,7 +48,6 @@ const ogImageURL = "https://raw.githubusercontent.com/FTS18/BitBar/main/assets/l
     <header class="header">
       <div class="header-inner">
         <a href="/" class="brand">
-          <img src="/logo.png" alt="BitBar" class="brand-icon" />
           <span class="brand-name">BitBar</span>
         </a>
         <nav class="nav">
@@ -154,7 +153,7 @@ const ogImageURL = "https://raw.githubusercontent.com/FTS18/BitBar/main/assets/l
     max-width: var(--max-w);
     margin: 0 auto;
     padding: 0 2rem;
-    height: 60px;
+    height: 52px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -169,12 +168,7 @@ const ogImageURL = "https://raw.githubusercontent.com/FTS18/BitBar/main/assets/l
   }
 
   .brand-icon {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-    display: block;
-    flex-shrink: 0;
-    filter: invert(1);
+    display: none;
   }
 
   .nav { display: flex; align-items: center; gap: 0.25rem; }
