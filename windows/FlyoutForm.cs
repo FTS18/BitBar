@@ -126,28 +126,48 @@ namespace BitBar
                 g.DrawRoundedRectangle(borderPen, borderRect, 4);
             }
 
-            using (Font titleFont = new Font("Segoe UI Variable Display", 11, FontStyle.Bold))
-            using (Font normalFont = new Font("Segoe UI Variable Text", 9, FontStyle.Regular))
+            using (Font labelFont = new Font("Segoe UI Variable Text", 9, FontStyle.Regular))
+            using (Font valueFont = new Font("Segoe UI Variable Text", 9, FontStyle.Bold))
             using (SolidBrush textBrush = new SolidBrush(textColor))
             using (SolidBrush subTextBrush = new SolidBrush(subTextColor))
+            using (SolidBrush greenBrush = new SolidBrush(Color.FromArgb(52, 199, 89))) // Win11/iOS Green
+            using (SolidBrush redBrush = new SolidBrush(Color.FromArgb(255, 59, 48)))   // Win11/iOS Red
+            using (Pen sepPen = new Pen(isLightTheme ? Color.FromArgb(225, 225, 225) : Color.FromArgb(55, 55, 55), 1))
+            using (StringFormat rightAlign = new StringFormat { Alignment = StringAlignment.Far })
             {
-                // Top consumer text
-                g.DrawString("Top Consumer", normalFont, subTextBrush, 10, 10);
-                g.DrawString(topConsumer, titleFont, textBrush, 10, 26);
+                int startX = 12;
+                int endX = this.Width - 12;
 
-                // Speeds
-                g.DrawString($"D: {FormatSpeed(currentDown)}", titleFont, new SolidBrush(Color.FromArgb(46, 204, 113)), 10, 50);
-                g.DrawString($"U: {FormatSpeed(currentUp)}", titleFont, new SolidBrush(Color.FromArgb(231, 76, 60)), 120, 50);
+                // Row 1: Consumer
+                g.DrawString("Consumer", labelFont, subTextBrush, startX, 8);
+                g.DrawString(topConsumer, valueFont, textBrush, endX, 8, rightAlign);
+
+                // Separator 1
+                g.DrawLine(sepPen, startX, 26, endX, 26);
+
+                // Row 2: Download
+                g.DrawString("Download", labelFont, subTextBrush, startX, 29);
+                g.DrawString(FormatSpeed(currentDown), valueFont, greenBrush, endX, 29, rightAlign);
+
+                // Separator 2
+                g.DrawLine(sepPen, startX, 47, endX, 47);
+
+                // Row 3: Upload
+                g.DrawString("Upload", labelFont, subTextBrush, startX, 50);
+                g.DrawString(FormatSpeed(currentUp), valueFont, redBrush, endX, 50, rightAlign);
+
+                // Separator 3
+                g.DrawLine(sepPen, startX, 68, endX, 68);
 
                 // Draw Graph Box
-                Rectangle graphRect = new Rectangle(10, 80, this.Width - 20, 70);
+                Rectangle graphRect = new Rectangle(10, 78, this.Width - 20, 72);
                 using (SolidBrush bgBrush = new SolidBrush(graphBg))
                 {
                     g.FillRoundedRectangle(bgBrush, graphRect, 5);
                 }
 
-                DrawGraph(g, graphRect, downHistory.ToList(), Color.FromArgb(46, 204, 113));
-                DrawGraph(g, graphRect, upHistory.ToList(), Color.FromArgb(231, 76, 60));
+                DrawGraph(g, graphRect, downHistory.ToList(), Color.FromArgb(52, 199, 89));
+                DrawGraph(g, graphRect, upHistory.ToList(), Color.FromArgb(255, 59, 48));
             }
         }
 
