@@ -185,18 +185,18 @@ const btnLabel = version
     min-width: 0;
   }
 
-  /* Staggered entrance animations */
+  /* Staggered entrance animations (delayed to account for 2s splash screen) */
   .hero-left > * {
     animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     opacity: 0;
     transform: translateY(15px);
   }
-  .hero-left .eyebrow { animation-delay: 0.1s; }
-  .hero-left h1 { animation-delay: 0.15s; }
-  .hero-left .hero-desc { animation-delay: 0.2s; }
-  .hero-left .hero-actions { animation-delay: 0.25s; }
-  .hero-left .hero-badges-ticker { animation-delay: 0.3s; }
-  .hero-left .hero-stats { animation-delay: 0.35s; }
+  .hero-left .eyebrow { animation-delay: 2.1s; }
+  .hero-left h1 { animation-delay: 2.15s; }
+  .hero-left .hero-desc { animation-delay: 2.2s; }
+  .hero-left .hero-actions { animation-delay: 2.25s; }
+  .hero-left .hero-badges-ticker { animation-delay: 2.3s; }
+  .hero-left .hero-stats { animation-delay: 2.35s; }
 
   @keyframes fadeUp {
     to { opacity: 1; transform: translateY(0); }
@@ -332,7 +332,7 @@ const btnLabel = version
     align-items: center;
     justify-content: center;
     position: relative;
-    animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+    animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 2.3s forwards;
     opacity: 0;
     transform: translateY(15px);
   }
