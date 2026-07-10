@@ -474,29 +474,29 @@ const btnLabel = version
   /* ── Demo & Features Layout ───────── */
   .demo-features-section {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 3rem;
     align-items: center;
     margin: 1.5rem 0;
   }
-  .demo-col { display: flex; justify-content: center; }
-  .features-col { display: flex; flex-direction: column; }
+  .demo-col { display: flex; justify-content: center; min-width: 0; }
+  .features-col { display: flex; flex-direction: column; min-width: 0; }
 
   .demo-video-wrapper {
-    border-radius: 16px;
+    border-radius: 12px;
     overflow: hidden;
     border: 1px solid var(--cream-300);
     box-shadow: 0 12px 48px rgba(13, 12, 9, 0.08);
     background: var(--ink-900);
     line-height: 0;
     max-width: 100%;
+    display: inline-flex;
   }
   .demo-video {
-    width: 100%;
+    max-width: 100%;
     height: auto;
-    object-fit: cover;
     display: block;
-    border-radius: 16px;
+    border-radius: 12px;
   }
 
   /* ── Install Box ──────────────────── */
