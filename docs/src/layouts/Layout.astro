@@ -49,7 +49,6 @@ const ogImageURL = "https://raw.githubusercontent.com/FTS18/BitBar/main/assets/l
     <div id="splash-screen" class="splash-screen">
       <div class="splash-content">
         <img src="/logo.png" alt="BitBar" class="splash-logo" />
-        <span class="splash-text">BitBar</span>
       </div>
     </div>
 
@@ -462,27 +461,12 @@ const ogImageURL = "https://raw.githubusercontent.com/FTS18/BitBar/main/assets/l
     visibility: hidden;
   }
 
-  .splash-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-  }
-
   .splash-logo {
-    width: 96px;
-    height: 96px;
+    width: 160px;
+    height: 160px;
     object-fit: contain;
     filter: invert(1);
     animation: splashPulse 1.8s infinite ease-in-out;
-  }
-
-  .splash-text {
-    font-family: var(--serif);
-    font-size: 2.2rem;
-    font-weight: 400;
-    color: var(--ink-900);
-    letter-spacing: -0.02em;
   }
 
   @keyframes splashPulse {
