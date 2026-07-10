@@ -6,58 +6,65 @@ import Layout from '../layouts/Layout.astro';
 
   <!-- HERO -->
   <section class="hero">
+
+    <!-- Left: Text + CTA -->
     <div class="hero-left">
       <p class="eyebrow">Open-source &middot; Windows native &middot; MIT License</p>
+
       <h1>Your network speed.<br /><em>Always visible.</em></h1>
+
       <p class="hero-desc">
-        BitBar lives directly in your Windows 11 taskbar — showing live upload and download speeds with no Electron, no background service, and no bloat.
+        BitBar sits in your Windows 11 taskbar showing live upload and
+        download speeds — no Electron, no background service, no bloat.
       </p>
+
       <div class="hero-actions">
-        <a href="https://github.com/FTS18/BitBar/releases" target="_blank" rel="noopener noreferrer" class="btn btn-dark">
+        <a
+          href="https://github.com/FTS18/BitBar/releases"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-dark"
+        >
           Download BitBar.exe
         </a>
         <a href="/docs/install" class="btn btn-outline">Read the docs</a>
       </div>
+
       <div class="hero-badges">
         <span class="badge">Windows 11</span>
         <span class="badge">No background service</span>
         <span class="badge">.NET 10 &middot; ~5 MB</span>
       </div>
-    </div>
 
-    <div class="hero-right">
-      <p class="preview-label">Flyout Preview</p>
-      <div class="widget">
-        <div class="widget-row">
-          <span class="wk">Consumer</span>
-          <span class="wv">chrome.exe</span>
+      <!-- Inline stats row -->
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">0 MB</span>
+          <span class="stat-label">idle memory</span>
         </div>
-        <hr class="whr" />
-        <div class="widget-row">
-          <span class="wk">Download</span>
-          <span class="wv wv-down">142.8 KB/s</span>
+        <div class="stat-div"></div>
+        <div class="stat">
+          <span class="stat-num">&lt;0.1%</span>
+          <span class="stat-label">CPU overhead</span>
         </div>
-        <hr class="whr" />
-        <div class="widget-row">
-          <span class="wk">Upload</span>
-          <span class="wv wv-up">48.2 KB/s</span>
-        </div>
-        <hr class="whr" />
-        <div class="widget-graph">
-          <svg viewBox="0 0 220 56" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#1A1813" stop-opacity="0.12"/>
-                <stop offset="100%" stop-color="#1A1813" stop-opacity="0"/>
-              </linearGradient>
-            </defs>
-            <path d="M0 40 C30 10,50 48,80 22 S130 40,165 12 L220 20 L220 56 L0 56 Z" fill="url(#g)"/>
-            <path d="M0 40 C30 10,50 48,80 22 S130 40,165 12 L220 20" fill="none" stroke="#1A1813" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span class="graph-label">60 second history</span>
+        <div class="stat-div"></div>
+        <div class="stat">
+          <span class="stat-num">~5 MB</span>
+          <span class="stat-label">binary size</span>
         </div>
       </div>
     </div>
+
+    <!-- Right: Logo -->
+    <div class="hero-right">
+      <img
+        src="/logo.png"
+        alt="BitBar logo"
+        class="hero-logo"
+        draggable="false"
+      />
+    </div>
+
   </section>
 
   <div class="rule"></div>
@@ -109,43 +116,44 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <style>
-  /* ── Hero ─────────────────────── */
+  /* ── Hero layout ──────────────────── */
   .hero {
     display: grid;
-    grid-template-columns: 1fr 280px;
-    gap: 4rem;
-    align-items: start;
+    grid-template-columns: 1fr 320px;
+    gap: 3rem;
+    align-items: center;
     padding: 3.5rem 0 3rem;
   }
 
+  /* ── Left column ──────────────────── */
   .hero-left {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
-    max-width: 540px;
   }
 
   .eyebrow {
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.12em;
     color: var(--ink-300);
+    margin: 0;
   }
 
   h1 {
     font-family: 'Instrument Serif', Georgia, serif;
-    font-size: 3.25rem;
+    font-size: 3.5rem;
     font-weight: 400;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
     color: var(--ink-900);
     margin: 0;
   }
 
   h1 em {
     font-style: italic;
-    color: var(--ink-500);
+    color: var(--ink-400, #7a7567);
   }
 
   .hero-desc {
@@ -153,116 +161,87 @@ import Layout from '../layouts/Layout.astro';
     color: var(--ink-500);
     line-height: 1.7;
     margin: 0;
+    max-width: 42ch;
   }
 
   .hero-actions {
     display: flex;
-    gap: 0.75rem;
+    gap: 0.65rem;
     flex-wrap: wrap;
+    margin-top: 0.25rem;
   }
 
   .hero-badges {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.4rem;
     flex-wrap: wrap;
   }
 
   .badge {
-    font-size: 0.73rem;
+    font-size: 0.72rem;
     font-weight: 600;
-    color: var(--ink-400, var(--ink-500));
+    color: var(--ink-500);
     background: var(--cream-200);
     border: 1px solid var(--cream-300);
-    padding: 0.2rem 0.65rem;
+    padding: 0.18rem 0.6rem;
     border-radius: 999px;
   }
 
-  /* ── Widget ───────────────────── */
-  .hero-right {
+  /* ── Stats row ────────────────────── */
+  .hero-stats {
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding-top: 0.5rem;
-  }
-
-  .preview-label {
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--ink-300);
-    margin: 0;
-  }
-
-  .widget {
-    background: var(--cream-100);
-    border: 1.5px solid var(--cream-300);
-    border-radius: 10px;
-    padding: 12px 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-    box-shadow:
-      0 2px 8px rgba(0,0,0,0.06),
-      0 1px 3px rgba(0,0,0,0.04);
-    width: 240px;
-  }
-
-  .widget-row {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 1.25rem;
+    padding-top: 0.25rem;
+    border-top: 1.5px solid var(--cream-200);
+    margin-top: 0.25rem;
   }
 
-  .wk {
-    font-size: 0.8rem;
-    color: var(--ink-300);
-    font-weight: 500;
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
   }
 
-  .wv {
+  .stat-num {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.82rem;
+    font-size: 1rem;
     font-weight: 600;
     color: var(--ink-900);
+    line-height: 1;
   }
 
-  .wv-down { color: #2a7a46; }
-  .wv-up   { color: #a03020; }
-
-  .whr {
-    border: none;
-    border-top: 1px solid var(--cream-300);
-    margin: 0;
-  }
-
-  .widget-graph {
-    background: var(--bg);
-    border: 1px solid var(--cream-300);
-    border-radius: 5px;
-    overflow: hidden;
-    position: relative;
-    height: 56px;
-  }
-
-  .widget-graph svg {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-
-  .graph-label {
-    position: absolute;
-    bottom: 4px;
-    left: 7px;
-    font-size: 0.6rem;
-    font-weight: 700;
+  .stat-label {
+    font-size: 0.7rem;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
     color: var(--ink-300);
   }
 
-  /* ── Shared ───────────────────── */
+  .stat-div {
+    width: 1px;
+    height: 28px;
+    background: var(--cream-300);
+  }
+
+  /* ── Right column: Logo ───────────── */
+  .hero-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-logo {
+    width: 280px;
+    height: 280px;
+    object-fit: contain;
+    filter: invert(1) drop-shadow(0 4px 24px rgba(0,0,0,0.12));
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  /* ── Shared ───────────────────────── */
   .rule {
     height: 1.5px;
     background: var(--cream-200);
@@ -280,7 +259,7 @@ import Layout from '../layouts/Layout.astro';
     margin: 0 0 2rem;
   }
 
-  /* ── Features Bento ───────────── */
+  /* ── Features bento ───────────────── */
   .features {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -303,28 +282,36 @@ import Layout from '../layouts/Layout.astro';
   .feature:hover { background: var(--cream-100); }
 
   .feature-title {
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     font-weight: 700;
     color: var(--ink-900);
     margin: 0;
   }
 
   .feature-desc {
-    font-size: 0.875rem;
+    font-size: 0.85rem;
     color: var(--ink-500);
-    line-height: 1.6;
+    line-height: 1.65;
     margin: 0;
   }
 
-  /* ── Responsive ───────────────── */
+  /* ── Responsive ───────────────────── */
   @media (max-width: 800px) {
     .hero {
       grid-template-columns: 1fr;
-      gap: 2.5rem;
+      gap: 2rem;
       padding: 2rem 0;
     }
-    h1 { font-size: 2.25rem; }
-    .widget { width: 100%; }
+
+    .hero-right { order: -1; }
+
+    .hero-logo {
+      width: 180px;
+      height: 180px;
+    }
+
+    h1 { font-size: 2.5rem; }
+
     .features { grid-template-columns: 1fr; }
   }
 </style>
