@@ -161,7 +161,7 @@ const ogImageURL = "https://raw.githubusercontent.com/FTS18/BitBar/main/assets/l
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
 
   body {
     background: var(--bg);
@@ -173,6 +173,7 @@ const ogImageURL = "https://raw.githubusercontent.com/FTS18/BitBar/main/assets/l
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
   }
 
   a { color: inherit; text-decoration: none; }

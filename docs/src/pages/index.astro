@@ -344,27 +344,29 @@ const btnLabel = version
     margin: 0 0 2rem;
   }
 
-  /* ── Features bento ───────────────── */
+  /* ── Features ─────────────────────── */
   .features {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: var(--cream-300);
-    border: 1.5px solid var(--cream-300);
-    border-radius: 8px;
-    overflow: hidden;
+    gap: 1.25rem;
   }
 
   .feature {
-    background: var(--bg);
+    background: var(--cream-100);
+    border: 1px solid var(--cream-300);
+    border-radius: 12px;
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    transition: background 0.12s;
+    transition: all 0.2s ease;
   }
 
-  .feature:hover { background: var(--cream-100); }
+  .feature:hover { 
+    background: var(--cream-200); 
+    border-color: var(--cream-400);
+    transform: translateY(-2px);
+  }
 
   .feature-title {
     font-size: 0.875rem;
@@ -447,13 +449,7 @@ const btnLabel = version
 
 
     .hero-badges-ticker {
-      width: 100%;
-      max-width: 100%;
-      align-self: stretch;
-      mask: none !important;
-      -webkit-mask: none !important;
-      mask-image: none !important;
-      -webkit-mask-image: none !important;
+      display: none; /* Hide ticker on mobile to prevent clutter & overflow */
     }
 
     /* Hide stats row on mobile — too cluttered */
@@ -462,11 +458,14 @@ const btnLabel = version
     /* Single-col features */
     .features {
       grid-template-columns: 1fr;
-      border-radius: 8px;
+      gap: 1rem;
     }
 
     /* Tighter feature cells */
-    .feature { padding: 1.1rem 1.25rem; }
+    .feature { 
+      padding: 1.25rem; 
+      border-radius: 10px;
+    }
 
     .section { padding: 1.75rem 0; }
 
