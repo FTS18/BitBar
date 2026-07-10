@@ -4,6 +4,7 @@ interface Props {
   description?: string;
   showSidebar?: boolean;
   activeSlug?: string;
+  stars?: number;
 }
 
 const {
@@ -11,6 +12,7 @@ const {
   description = "A minimal, native network speed monitor that lives in your Windows 11 taskbar. No bloat, no electron, no background services.",
   showSidebar = false,
   activeSlug = "",
+  stars,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, "https://github.com/FTS18/BitBar");
@@ -80,8 +82,8 @@ const ogImageURL = "https://raw.githubusercontent.com/FTS18/BitBar/main/assets/l
         <nav class="nav">
           <a href="/docs/install" class={activeSlug.startsWith("docs") ? "nav-link nav-active" : "nav-link"}>Docs</a>
           <a href="https://github.com/FTS18/BitBar" target="_blank" rel="noopener noreferrer" class="nav-link nav-github">
-            GitHub
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" 2="3"/></svg>
+            GitHub {stars > 0 && <span class="gh-stars">★ {stars}</span>}
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           </a>
         </nav>
       </div>
@@ -114,7 +116,7 @@ const ogImageURL = "https://raw.githubusercontent.com/FTS18/BitBar/main/assets/l
     <nav class="bottom-nav">
       <a href="/docs/install" class="bnav-link">Docs</a>
       <a href="https://github.com/FTS18/BitBar" target="_blank" rel="noopener noreferrer" class="bnav-link bnav-gh">
-        GitHub
+        GitHub {stars > 0 && <span class="gh-stars">★ {stars}</span>}
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
       </a>
     </nav>
@@ -273,6 +275,13 @@ const ogImageURL = "https://raw.githubusercontent.com/FTS18/BitBar/main/assets/l
     margin-left: 0.5rem;
   }
   .nav-github:hover { background: var(--ink-700); }
+
+  .gh-stars {
+    font-size: 0.75rem;
+    color: var(--cream-300);
+    margin-left: 0.2rem;
+    font-weight: 500;
+  }
 
   /* ── Page Body ───────────────────────── */
   .page-body {

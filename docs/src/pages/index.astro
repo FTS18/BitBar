@@ -20,6 +20,7 @@ let downloadUrl  = FALLBACK_URL;
 let version      = '';
 let assetName    = 'BitBar.exe';
 let fileSizeMB   = '';
+let stars        = 0;
 
 try {
   const res  = await fetch(`https://api.github.com/repos/${REPO}/releases/latest`, {
@@ -39,12 +40,23 @@ try {
   // Silent fallback — link goes to releases page
 }
 
+// Fetch repo stats
+try {
+  const repoRes = await fetch(`https://api.github.com/repos/${REPO}`, {
+    headers: { Accept: 'application/vnd.github+json' },
+  });
+  if (repoRes.ok) {
+    const data = await repoRes.json();
+    stars = data.stargazers_count || 0;
+  }
+} catch (_) {}
+
 const btnLabel = version
   ? `Download ${assetName} (${version})`
   : `Download BitBar.exe`;
 ---
 
-<Layout title="Home">
+<Layout title="Home" stars={stars}>
 
   <!-- HERO -->
   <section class="hero">
@@ -121,6 +133,16 @@ const btnLabel = version
 
   <div class="rule reveal-on-scroll"></div>
 
+  <!-- DEMO PLACEHOLDER -->
+  <section class="section reveal-on-scroll">
+    <div class="demo-placeholder">
+      <div class="demo-content">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
+        <p>Drop your Demo GIF/Video here</p>
+      </div>
+    </div>
+  </section>
+
   <!-- FEATURES -->
   <section class="section">
     <h2 class="section-heading reveal-on-scroll">Why BitBar?</h2>
@@ -146,6 +168,37 @@ const btnLabel = version
 
   <div class="rule reveal-on-scroll"></div>
 
+  <!-- INSTALL -->
+  <section class="section reveal-on-scroll">
+    <h2 class="section-heading">Install in seconds</h2>
+    <div class="install-box">
+      <code id="install-code">winget install FTS18.BitBar</code>
+      <button class="btn btn-outline copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('install-code').innerText); this.innerText='Copied!'; setTimeout(()=>this.innerText='Copy',2000)">Copy</button>
+    </div>
+  </section>
+
+  <div class="rule reveal-on-scroll"></div>
+
+  <!-- THEME SHOWCASE -->
+  <section class="section reveal-on-scroll">
+    <div class="theme-header">
+      <h2 class="section-heading" style="margin:0;">Theme-aware</h2>
+      <button class="btn btn-outline theme-btn" onclick="document.getElementById('mockup-container').classList.toggle('dark-mode')">Toggle Mode</button>
+    </div>
+    <div class="theme-mockup" id="mockup-container">
+      <div class="mockup-taskbar">
+        <div class="mockup-icon i1"></div>
+        <div class="mockup-icon i2"></div>
+        <div class="mockup-widget">
+          <div class="w-text">U: 1.2 KB/s</div>
+          <div class="w-text">D: 4.5 MB/s</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule reveal-on-scroll"></div>
+
   <!-- SPECS -->
   <section class="section">
     <h2 class="section-heading reveal-on-scroll">System Requirements</h2>
@@ -162,6 +215,27 @@ const btnLabel = version
           <tr><td>CPU overhead</td><td>Less than 0.1% on typical modern hardware</td></tr>
         </tbody>
       </table>
+    </div>
+  </section>
+
+  <div class="rule reveal-on-scroll"></div>
+
+  <!-- FAQ -->
+  <section class="section reveal-on-scroll">
+    <h2 class="section-heading">Frequently Asked Questions</h2>
+    <div class="faq">
+      <details class="faq-item">
+        <summary>Does this work on Windows 10?</summary>
+        <p>Yes, BitBar works on Windows 10 (22H2 or later), but it is heavily optimized for the Windows 11 taskbar experience.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does it consume a lot of battery?</summary>
+        <p>Not at all. BitBar has a CPU overhead of less than 0.1% and auto-fades when the network is idle.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How do I uninstall it?</summary>
+        <p>Simply delete the single `.exe` file. BitBar leaves no registry keys or background services behind.</p>
+      </details>
     </div>
   </section>
 
@@ -420,6 +494,126 @@ const btnLabel = version
     margin: 0;
   }
 
+  /* ── Demo Placeholder ─────────────── */
+  .demo-placeholder {
+    width: 100%;
+    aspect-ratio: 16/9;
+    max-height: 480px;
+    background: var(--cream-100);
+    border: 2px dashed var(--cream-400);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-300);
+    margin: 1rem 0;
+  }
+  .demo-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  /* ── Install Box ──────────────────── */
+  .install-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--cream-100);
+    border: 1.5px solid var(--cream-300);
+    border-radius: 12px;
+    padding: 0.5rem 0.5rem 0.5rem 1.25rem;
+  }
+  .install-box code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--ink-900);
+  }
+  .install-box .copy-btn { padding: 0.5rem 1.25rem; font-size: 0.85rem; border-radius: 8px; }
+
+  /* ── Theme Showcase ───────────────── */
+  .theme-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+  }
+  .theme-btn { padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: 8px; }
+  .theme-mockup {
+    background: var(--cream-100);
+    border: 1.5px solid var(--cream-300);
+    border-radius: 12px;
+    padding: 3rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .mockup-taskbar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: #f3f3f3;
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border: 1px solid #e5e5e5;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .mockup-icon { width: 24px; height: 24px; border-radius: 4px; background: #ddd; transition: background 0.3s; }
+  .mockup-icon.i2 { background: #ccc; }
+  .mockup-widget {
+    display: flex;
+    flex-direction: column;
+    padding: 0 0.25rem;
+  }
+  .w-text {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 0.65rem;
+    line-height: 1.2;
+    color: #111;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+
+  /* Dark mode mockup overrides */
+  .theme-mockup.dark-mode { background: #1a1a1a; border-color: #333; }
+  .theme-mockup.dark-mode .mockup-taskbar { background: #202020; border-color: #333; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+  .theme-mockup.dark-mode .mockup-icon { background: #444; }
+  .theme-mockup.dark-mode .mockup-icon.i2 { background: #555; }
+  .theme-mockup.dark-mode .w-text { color: #fff; }
+
+  /* ── FAQ ──────────────────────────── */
+  .faq { display: flex; flex-direction: column; gap: 1rem; }
+  .faq-item {
+    background: var(--cream-100);
+    border: 1.5px solid var(--cream-300);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+  }
+  .faq-item summary {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--ink-900);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after { content: '+'; font-size: 1.2rem; color: var(--ink-500); }
+  .faq-item[open] summary::after { content: '−'; }
+  .faq-item p {
+    margin: 1rem 0 0;
+    font-size: 0.9rem;
+    color: var(--ink-700);
+    line-height: 1.6;
+  }
 
   /* ── Mobile ────────────────────────── */
   @media (max-width: 800px) {
