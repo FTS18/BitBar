@@ -345,24 +345,102 @@ const btnLabel = version
     margin: 0;
   }
 
-  /* ── Responsive ───────────────────── */
+
+  /* ── Mobile ────────────────────────── */
   @media (max-width: 800px) {
+
+    /* Stack hero vertically, centered */
     .hero {
       grid-template-columns: 1fr;
-      gap: 1.5rem;
-      padding: 2rem 0;
+      gap: 0;
+      padding: 1.75rem 0 1.5rem;
+      text-align: center;
     }
 
-    /* Logo above text on mobile */
-    .hero-right { order: -1; justify-content: center; }
+    /* Logo first, big and centered */
+    .hero-right {
+      order: -1;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+    }
 
     .hero-logo {
-      max-width: 85vw;
-      width: 85vw;
+      width: 64vw;
+      max-width: 240px;
+      filter: invert(1);
     }
 
-    h1 { font-size: 2.6rem; }
+    /* Left content centered */
+    .hero-left {
+      align-items: center;
+      gap: 0.9rem;
+    }
 
-    .features { grid-template-columns: 1fr; }
+    .eyebrow { font-size: 0.68rem; }
+
+    h1 {
+      font-size: 2.4rem;
+      letter-spacing: -0.025em;
+    }
+
+    .hero-desc {
+      font-size: 0.925rem;
+      max-width: 36ch;
+      text-align: center;
+    }
+
+    /* Single full-width CTA, text link below */
+    .hero-actions {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.5rem;
+      width: 100%;
+    }
+
+    .hero-actions .btn-dark {
+      width: 100%;
+      justify-content: center;
+      padding: 0.85rem 1rem;
+      font-size: 0.95rem;
+    }
+
+    .hero-actions .btn-outline {
+      border: none;
+      background: none;
+      color: var(--ink-400, var(--ink-500));
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.25rem;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* Tighter badges, centered row */
+    .hero-badges {
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    /* Hide stats row on mobile — too cluttered */
+    .hero-stats { display: none; }
+
+    /* Single-col features */
+    .features {
+      grid-template-columns: 1fr;
+      border-radius: 8px;
+    }
+
+    /* Tighter feature cells */
+    .feature { padding: 1.1rem 1.25rem; }
+
+    .section { padding: 1.75rem 0; }
+
+    .section-heading {
+      font-size: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .rule { margin: 0.25rem 0; }
   }
 </style>
